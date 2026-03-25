@@ -1,0 +1,316 @@
+{
+  "questions": [
+    {
+      "level": 1,
+      "theme": "Prime vs Composite",
+      "question_text": "Sort each number! Is it PRIME (only 1 and itself) or COMPOSITE?",
+      "words": [
+        { "id": "num_1", "text": "2" },
+        { "id": "num_2", "text": "4" },
+        { "id": "num_3", "text": "7" },
+        { "id": "num_4", "text": "9" },
+        { "id": "num_5", "text": "11" },
+        { "id": "num_6", "text": "15" },
+        { "id": "num_7", "text": "13" },
+        { "id": "num_8", "text": "21" }
+      ],
+      "categories": [
+        { "id": "cat_1", "label": "Prime Numbers", "color": "#a855f7", "glow": "#a855f7", "emoji": "⭐" },
+        { "id": "cat_2", "label": "Composite Numbers", "color": "#f43f5e", "glow": "#f43f5e", "emoji": "🔢" }
+      ],
+      "hints": {
+        "num_1": "2 is the only even prime!",
+        "num_2": "4 = 2 x 2",
+        "num_3": "7 is only 1 x 7",
+        "num_4": "9 = 3 x 3",
+        "num_5": "11 is only 1 x 11",
+        "num_6": "15 = 3 x 5",
+        "num_7": "13 is only 1 x 13",
+        "num_8": "21 = 3 x 7"
+      },
+      "correct_answer": {
+        "num_1": ["cat_1"],
+        "num_2": ["cat_2"],
+        "num_3": ["cat_1"],
+        "num_4": ["cat_2"],
+        "num_5": ["cat_1"],
+        "num_6": ["cat_2"],
+        "num_7": ["cat_1"],
+        "num_8": ["cat_2"]
+      }
+    },
+    {
+      "level": 2,
+      "theme": "Multiples of 2 and 5",
+      "question_text": "Is the number a Multiple of 2 or a Multiple of 5? (If both, either bin is correct!)",
+      "words": [
+        { "id": "num_1", "text": "2" },
+        { "id": "num_2", "text": "5" },
+        { "id": "num_3", "text": "10" },
+        { "id": "num_4", "text": "14" },
+        { "id": "num_5", "text": "25" },
+        { "id": "num_6", "text": "20" },
+        { "id": "num_7", "text": "30" },
+        { "id": "num_8", "text": "4" }
+      ],
+      "categories": [
+        { "id": "cat_1", "label": "Multiples of 2", "color": "#3b82f6", "glow": "#3b82f6", "emoji": "2️⃣" },
+        { "id": "cat_2", "label": "Multiples of 5", "color": "#10b981", "glow": "#10b981", "emoji": "5️⃣" }
+      ],
+      "hints": {
+        "num_1": "2 x 1 = 2",
+        "num_2": "5 x 1 = 5",
+        "num_3": "10 is 2x5 and 5x2!",
+        "num_4": "2 x 7 = 14",
+        "num_5": "5 x 5 = 25",
+        "num_6": "20 is 2x10 and 5x4!",
+        "num_7": "30 is 2x15 and 5x6!",
+        "num_8": "2 x 2 = 4"
+      },
+      "correct_answer": {
+        "num_1": ["cat_1"],
+        "num_2": ["cat_2"],
+        "num_3": ["cat_1", "cat_2"],
+        "num_4": ["cat_1"],
+        "num_5": ["cat_2"],
+        "num_6": ["cat_1", "cat_2"],
+        "num_7": ["cat_1", "cat_2"],
+        "num_8": ["cat_1"]
+      }
+    },
+    {
+      "level": 3,
+      "theme": "Distance vs Time",
+      "question_text": "Sort the measurements into Distance units or Time units!",
+      "words": [
+        { "id": "num_1", "text": "400m" },
+        { "id": "num_2", "text": "1hr" },
+        { "id": "num_3", "text": "20 sec" },
+        { "id": "num_4", "text": "0.5cm" },
+        { "id": "num_5", "text": "5 km" },
+        { "id": "num_6", "text": "10 min" },
+        { "id": "num_7", "text": "50 yards" },
+        { "id": "num_8", "text": "2 days" }
+      ],
+      "categories": [
+        { "id": "cat_1", "label": "Distance", "color": "#f59e0b", "glow": "#f59e0b", "emoji": "📏" },
+        { "id": "cat_2", "label": "Time", "color": "#6366f1", "glow": "#6366f1", "emoji": "⏰" }
+      ],
+      "hints": {
+        "num_1": "Meters measure how far.",
+        "num_2": "Hours measure how long.",
+        "num_3": "Seconds measure time.",
+        "num_4": "Centimeters measure length.",
+        "num_5": "Kilometers measure distance.",
+        "num_6": "Minutes measure duration.",
+        "num_7": "Yards measure distance.",
+        "num_8": "Days measure time."
+      },
+      "correct_answer": {
+        "num_1": ["cat_1"],
+        "num_2": ["cat_2"],
+        "num_3": ["cat_2"],
+        "num_4": ["cat_1"],
+        "num_5": ["cat_1"],
+        "num_6": ["cat_2"],
+        "num_7": ["cat_1"],
+        "num_8": ["cat_2"]
+      }
+    },
+    {
+      "level": 4,
+      "theme": "Even vs Odd",
+      "question_text": "Is it an Even number or an Odd number?",
+      "words": [
+        { "id": "num_1", "text": "42" },
+        { "id": "num_2", "text": "17" },
+        { "id": "num_3", "text": "88" },
+        { "id": "num_4", "text": "33" },
+        { "id": "num_5", "text": "100" },
+        { "id": "num_6", "text": "1" },
+        { "id": "num_7", "text": "56" },
+        { "id": "num_8", "text": "9" }
+      ],
+      "categories": [
+        { "id": "cat_1", "label": "Even", "color": "#0ea5e9", "glow": "#0ea5e9", "emoji": "🔵" },
+        { "id": "cat_2", "label": "Odd", "color": "#f97316", "glow": "#f97316", "emoji": "🟠" }
+      ],
+      "hints": {
+        "num_1": "Ends in 2, so it's Even.",
+        "num_2": "Ends in 7, so it's Odd.",
+        "num_3": "Ends in 8, so it's Even.",
+        "num_4": "Ends in 3, so it's Odd.",
+        "num_5": "Ends in 0, so it's Even.",
+        "num_6": "1 is the first odd number.",
+        "num_7": "Ends in 6, so it's Even.",
+        "num_8": "9 is an odd number."
+      },
+      "correct_answer": {
+        "num_1": ["cat_1"],
+        "num_2": ["cat_2"],
+        "num_3": ["cat_1"],
+        "num_4": ["cat_2"],
+        "num_5": ["cat_1"],
+        "num_6": ["cat_2"],
+        "num_7": ["cat_1"],
+        "num_8": ["cat_2"]
+      }
+    },
+    {
+      "level": 5,
+      "theme": "Positive vs Negative",
+      "question_text": "Is the number Positive or Negative?",
+      "words": [
+        { "id": "num_1", "text": "15" },
+        { "id": "num_2", "text": "-7" },
+        { "id": "num_3", "text": "102" },
+        { "id": "num_4", "text": "-50" },
+        { "id": "num_5", "text": "0.5" },
+        { "id": "num_6", "text": "-1.2" },
+        { "id": "num_7", "text": "99" },
+        { "id": "num_8", "text": "-0.01" }
+      ],
+      "categories": [
+        { "id": "cat_1", "label": "Positive", "color": "#22c55e", "glow": "#22c55e", "emoji": "➕" },
+        { "id": "cat_2", "label": "Negative", "color": "#ef4444", "glow": "#ef4444", "emoji": "➖" }
+      ],
+      "hints": {
+        "num_1": "Greater than zero.",
+        "num_2": "Less than zero.",
+        "num_3": "Positive number.",
+        "num_4": "Negative number.",
+        "num_5": "Positive decimal.",
+        "num_6": "Negative decimal.",
+        "num_7": "Positive integer.",
+        "num_8": "Negative decimal."
+      },
+      "correct_answer": {
+        "num_1": ["cat_1"],
+        "num_2": ["cat_2"],
+        "num_3": ["cat_1"],
+        "num_4": ["cat_2"],
+        "num_5": ["cat_1"],
+        "num_6": ["cat_2"],
+        "num_7": ["cat_1"],
+        "num_8": ["cat_2"]
+      }
+    },
+    {
+      "level": 6,
+      "theme": "Factors of 12 and 18",
+      "question_text": "Is it a Factor of 12 or a Factor of 18? (If both, either bin works!)",
+      "words": [
+        { "id": "num_1", "text": "1" },
+        { "id": "num_2", "text": "2" },
+        { "id": "num_3", "text": "3" },
+        { "id": "num_4", "text": "4" },
+        { "id": "num_5", "text": "6" },
+        { "id": "num_6", "text": "9" },
+        { "id": "num_7", "text": "12" },
+        { "id": "num_8", "text": "18" }
+      ],
+      "categories": [
+        { "id": "cat_1", "label": "Factor of 12", "color": "#8b5cf6", "glow": "#8b5cf6", "emoji": "📁" },
+        { "id": "cat_2", "label": "Factor of 18", "color": "#ec4899", "glow": "#ec4899", "emoji": "📂" }
+      ],
+      "hints": {
+        "num_1": "1 is a factor of every number!",
+        "num_2": "2 divides both 12 and 18.",
+        "num_3": "3 divides both 12 and 18.",
+        "num_4": "12 / 4 = 3",
+        "num_5": "6 divides both 12 and 18.",
+        "num_6": "18 / 9 = 2",
+        "num_7": "12 is a factor of itself.",
+        "num_8": "18 is a factor of itself."
+      },
+      "correct_answer": {
+        "num_1": ["cat_1", "cat_2"],
+        "num_2": ["cat_1", "cat_2"],
+        "num_3": ["cat_1", "cat_2"],
+        "num_4": ["cat_1"],
+        "num_5": ["cat_1", "cat_2"],
+        "num_6": ["cat_2"],
+        "num_7": ["cat_1"],
+        "num_8": ["cat_2"]
+      }
+    },
+    {
+      "level": 7,
+      "theme": "Perfect Squares vs Cubes",
+      "question_text": "Is it a Perfect Square or a Perfect Cube?",
+      "words": [
+        { "id": "num_1", "text": "4" },
+        { "id": "num_2", "text": "8" },
+        { "id": "num_3", "text": "9" },
+        { "id": "num_4", "text": "27" },
+        { "id": "num_5", "text": "16" },
+        { "id": "num_6", "text": "64" },
+        { "id": "num_7", "text": "25" },
+        { "id": "num_8", "text": "125" }
+      ],
+      "categories": [
+        { "id": "cat_1", "label": "Perfect Square", "color": "#facc15", "glow": "#facc15", "emoji": "⏹️" },
+        { "id": "cat_2", "label": "Perfect Cube", "color": "#34d399", "glow": "#34d399", "emoji": "🧊" }
+      ],
+      "hints": {
+        "num_1": "2 x 2 = 4",
+        "num_2": "2 x 2 x 2 = 8",
+        "num_3": "3 x 3 = 9",
+        "num_4": "3 x 3 x 3 = 27",
+        "num_5": "4 x 4 = 16",
+        "num_6": "8x8 = 64 and 4x4x4 = 64!",
+        "num_7": "5 x 5 = 25",
+        "num_8": "5 x 5 x 5 = 125"
+      },
+      "correct_answer": {
+        "num_1": ["cat_1"],
+        "num_2": ["cat_2"],
+        "num_3": ["cat_1"],
+        "num_4": ["cat_2"],
+        "num_5": ["cat_1"],
+        "num_6": ["cat_1", "cat_2"],
+        "num_7": ["cat_1"],
+        "num_8": ["cat_2"]
+      }
+    },
+    {
+      "level": 8,
+      "theme": "Number Sort Challenge",
+      "question_text": "Final mission! Is the number Less than 50 or Greater than 50?",
+      "words": [
+        { "id": "num_1", "text": "12" },
+        { "id": "num_2", "text": "85" },
+        { "id": "num_3", "text": "49" },
+        { "id": "num_4", "text": "51" },
+        { "id": "num_5", "text": "22" },
+        { "id": "num_6", "text": "99" },
+        { "id": "num_7", "text": "5" },
+        { "id": "num_8", "text": "77" }
+      ],
+      "categories": [
+        { "id": "cat_1", "label": "Less than 50", "color": "#f97316", "glow": "#f97316", "emoji": "📉" },
+        { "id": "cat_2", "label": "Greater than 50", "color": "#2dd4bf", "glow": "#2dd4bf", "emoji": "📈" }
+      ],
+      "hints": {
+        "num_1": "12 < 50",
+        "num_2": "85 > 50",
+        "num_3": "Just below 50.",
+        "num_4": "Just above 50.",
+        "num_5": "22 < 50",
+        "num_6": "99 > 50",
+        "num_7": "5 < 50",
+        "num_8": "77 > 50"
+      },
+      "correct_answer": {
+        "num_1": ["cat_1"],
+        "num_2": ["cat_2"],
+        "num_3": ["cat_1"],
+        "num_4": ["cat_2"],
+        "num_5": ["cat_1"],
+        "num_6": ["cat_2"],
+        "num_7": ["cat_1"],
+        "num_8": ["cat_2"]
+      }
+    }
+  ]
+}
