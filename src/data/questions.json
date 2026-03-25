@@ -41,45 +41,6 @@
     },
     {
       "level": 2,
-      "theme": "Multiples of 2 and 5",
-      "question_text": "Is the number a Multiple of 2 or a Multiple of 5? (If both, either bin is correct!)",
-      "words": [
-        { "id": "num_1", "text": "2" },
-        { "id": "num_2", "text": "5" },
-        { "id": "num_3", "text": "10" },
-        { "id": "num_4", "text": "14" },
-        { "id": "num_5", "text": "25" },
-        { "id": "num_6", "text": "20" },
-        { "id": "num_7", "text": "30" },
-        { "id": "num_8", "text": "4" }
-      ],
-      "categories": [
-        { "id": "cat_1", "label": "Multiples of 2", "color": "#3b82f6", "glow": "#3b82f6", "emoji": "2️⃣" },
-        { "id": "cat_2", "label": "Multiples of 5", "color": "#10b981", "glow": "#10b981", "emoji": "5️⃣" }
-      ],
-      "hints": {
-        "num_1": "2 x 1 = 2",
-        "num_2": "5 x 1 = 5",
-        "num_3": "10 is 2x5 and 5x2!",
-        "num_4": "2 x 7 = 14",
-        "num_5": "5 x 5 = 25",
-        "num_6": "20 is 2x10 and 5x4!",
-        "num_7": "30 is 2x15 and 5x6!",
-        "num_8": "2 x 2 = 4"
-      },
-      "correct_answer": {
-        "num_1": ["cat_1"],
-        "num_2": ["cat_2"],
-        "num_3": ["cat_1", "cat_2"],
-        "num_4": ["cat_1"],
-        "num_5": ["cat_2"],
-        "num_6": ["cat_1", "cat_2"],
-        "num_7": ["cat_1", "cat_2"],
-        "num_8": ["cat_1"]
-      }
-    },
-    {
-      "level": 3,
       "theme": "Distance vs Time",
       "question_text": "Sort the measurements into Distance units or Time units!",
       "words": [
@@ -117,6 +78,46 @@
         "num_8": ["cat_2"]
       }
     },
+    {
+      "level": 3,
+      "theme": "Multiples of 2 and 5",
+      "question_text": "Is the number a Multiple of 2 or a Multiple of 5? (If both, either bin is correct!)",
+      "words": [
+        { "id": "num_1", "text": "2" },
+        { "id": "num_2", "text": "5" },
+        { "id": "num_3", "text": "10" },
+        { "id": "num_4", "text": "14" },
+        { "id": "num_5", "text": "25" },
+        { "id": "num_6", "text": "20" },
+        { "id": "num_7", "text": "30" },
+        { "id": "num_8", "text": "4" }
+      ],
+      "categories": [
+        { "id": "cat_1", "label": "Multiples of 2", "color": "#3b82f6", "glow": "#3b82f6", "emoji": "2️⃣" },
+        { "id": "cat_2", "label": "Multiples of 5", "color": "#10b981", "glow": "#10b981", "emoji": "5️⃣" }
+      ],
+      "hints": {
+        "num_1": "2 x 1 = 2",
+        "num_2": "5 x 1 = 5",
+        "num_3": "10 is 2x5 and 5x2!",
+        "num_4": "2 x 7 = 14",
+        "num_5": "5 x 5 = 25",
+        "num_6": "20 is 2x10 and 5x4!",
+        "num_7": "30 is 2x15 and 5x6!",
+        "num_8": "2 x 2 = 4"
+      },
+      "correct_answer": {
+        "num_1": ["cat_1"],
+        "num_2": ["cat_2"],
+        "num_3": ["cat_1", "cat_2"],
+        "num_4": ["cat_1"],
+        "num_5": ["cat_2"],
+        "num_6": ["cat_1", "cat_2"],
+        "num_7": ["cat_1", "cat_2"],
+        "num_8": ["cat_1"]
+      }
+    },
+    
     {
       "level": 4,
       "theme": "Even vs Odd",

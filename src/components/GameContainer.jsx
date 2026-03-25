@@ -44,22 +44,49 @@ function ParticleBurst({ x, y, color, onDone, count = 15 }) {
 // ─── Drag Ghost ────────────────────────────────────────────────────────────────
 function DragGhost({ dragging }) {
   if (!dragging) return null
+
+  const hasSpace = dragging.word.text.includes(' ')
+  const textParts = hasSpace ? dragging.word.text.split(' ') : [dragging.word.text]
+
   return (
     <div style={{
       position: 'fixed',
-      left:  dragging.x - (dragging.offsetX || 105),
-      top:   dragging.y - (dragging.offsetY || 75),
+      left:  dragging.x - (dragging.offsetX || 120),
+      top:   dragging.y - (dragging.offsetY || 120),
       pointerEvents: 'none', zIndex: 10001,
       display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-      transform: 'rotate(12deg)', 
-      filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.65))',
+      transform: 'rotate(8deg) scale(1.4)', 
+      filter: 'drop-shadow(0 0 40px rgba(253, 224, 71, 0.95)) drop-shadow(0 0 10px rgba(253, 224, 71, 0.6))',
+      transition: 'transform 0.1s ease-out',
     }}>
-      <img src={ASSETS.bulb} alt="" style={{ width: 140, height: 140, objectFit: 'contain' }} />
-      <span style={{
+      <img src={ASSETS.bulb} alt="" style={{ width: 240, height: 240, objectFit: 'contain', filter: 'brightness(1.3) contrast(1.1)' }} />
+      <div style={{
         position: 'absolute', top: '42%', left: '50%', transform: 'translate(-50%, -50%)',
-        fontFamily: "'Courier New', 'Consolas', monospace", fontWeight: 900, fontSize: dragging.word.text.length > 4 ? 22 : 32,
-        color: '#1e293b', letterSpacing: 1.2,
-      }}>{dragging.word.text}</span>
+        width: '85%', textAlign: 'center', lineHeight: 1,
+      }}>
+        <span style={{
+          fontFamily: "'Courier New', 'Consolas', monospace",
+          fontWeight: 900,
+          fontSize: hasSpace ? 20 : (dragging.word.text.length > 4 ? 20 : 25),
+          color: '#1e293b',
+          letterSpacing: 0.5,
+          lineHeight: 0.72,
+          pointerEvents: 'none',
+          textShadow: '0 0 1px rgba(255,255,255,0.8)',
+          whiteSpace: 'nowrap',
+          display: 'block',
+        }}>
+          {hasSpace ? (
+            <>
+              {textParts[0]}
+              <br />
+              <span style={{ fontSize: '0.85em' }}>{textParts.slice(1).join(' ')}</span>
+            </>
+          ) : (
+            dragging.word.text
+          )}
+        </span>
+      </div>
     </div>
   )
 }

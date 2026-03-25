@@ -5,7 +5,7 @@ import { useRef, useEffect } from 'react'
 import { ASSETS } from '../utils/constants'
 
 // Fixed positions for 2 bins
-const BIN_POSITIONS = [{ left: '25%' }, { left: '57%' }]
+const BIN_POSITIONS = [{ left: '25%' }, { left: '55%' }]
 
 export default function CategoryBins({
   categories,
