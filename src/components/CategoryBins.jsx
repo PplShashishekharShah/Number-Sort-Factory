@@ -74,13 +74,13 @@ function BinItem({ category, index, pos, sortedCount, isGlowing, isShaking, bins
       <div className="glass" style={{
         border: `2px solid ${category.color}`,
         borderRadius: 12,
-        padding: '2px 14px',
+        padding: '2px 18px',
         marginBottom: -10,
         position: 'relative',
         top: -5,
         textAlign: 'center',
         boxShadow: isGlowing
-          ? `0 0 30px ${category.glow}`
+          ? `0 0 40px ${category.glow}`
           : `0 4px 15px rgba(0,0,0,0.4), inset 0 0 10px ${category.glow}33`,
         minWidth: 180,
         boxSizing: 'border-box',
@@ -100,12 +100,39 @@ function BinItem({ category, index, pos, sortedCount, isGlowing, isShaking, bins
         }}>
           {category.label}
         </div>
+
+        {/* Floating Badge (OUTSIDE) */}
         {sortedCount > 0 && (
-          <div style={{ fontSize: 10, color: 'var(--accent-cyan)', marginTop: 4, fontWeight: 800, letterSpacing: 0.5 }}>
-            {sortedCount} SORTED
+          <div style={{
+            position: 'absolute',
+            right: -22,
+            top: '50%',
+            width: 30,
+            height: 30,
+            borderRadius: '50%',
+            background: category.color,
+            color: '#fff',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 16,
+            fontWeight: 900,
+            boxShadow: `0 0 25px ${category.glow}`,
+            animation: 'float-outside 2s ease-in-out infinite',
+            border: '2px solid rgba(255,255,255,0.5)',
+            zIndex: 30,
+          }}>
+            {sortedCount}
           </div>
         )}
       </div>
+
+      <style>{`
+        @keyframes float-outside {
+          0%, 100% { transform: translateY(-50%); }
+          50%      { transform: translateY(-70%); }
+        }
+      `}</style>
 
       <div style={{
         width: SLOT_W,
