@@ -2,7 +2,7 @@
 // Wrapper for Web Speech API to provide educational feedback.
 // Optimized to only read text, skipping emojis and decorative symbols.
 
-export const speak = (text, cancelCurrent = true) => {
+export const speak = (text, cancelCurrent = true, rate = 1.0, onEnd = null) => {
   if (!window.speechSynthesis) return
 
   if (cancelCurrent) {
@@ -18,8 +18,9 @@ export const speak = (text, cancelCurrent = true) => {
   if (!cleanText) return
 
   const utterance = new SpeechSynthesisUtterance(cleanText)
-  utterance.rate = 1.0
+  utterance.rate = rate
   utterance.pitch = 1.0
+  if (onEnd) utterance.onend = onEnd
 
   const doSpeak = () => {
     const voices = window.speechSynthesis.getVoices()

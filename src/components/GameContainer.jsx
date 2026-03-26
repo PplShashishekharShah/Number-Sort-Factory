@@ -16,6 +16,8 @@ import EffectsLayer     from './EffectsLayer'
 import CompletionScreen from './CompletionScreen'
 import RobotGuide       from './RobotGuide'
 import NumberBulb      from './NumberBulb'
+import StartScreen     from './StartScreen'
+import TutorialOverlay from './TutorialOverlay'
 
 // SYNC: Code-driven move exactly matching CSS 2.2s/200px (L-to-R)
 const BELT_SPEED = 1.5151515
@@ -92,6 +94,7 @@ function DragGhost({ dragging }) {
 }
 
 export default function GameContainer() {
+  const [gameState, setGameState] = useState('start') // 'start', 'tutorial', 'playing'
   const [currentLevelIdx, setCurrentLevelIdx] = useState(0)
   
   // Dynamic extraction of question data
@@ -145,13 +148,13 @@ export default function GameContainer() {
     setWordPositions({})
     
     // Initial Question Voice on Level Start
-    if (!isMuted) {
+    if (!isMuted && gameState === 'playing') {
       const t = setTimeout(() => {
         speak(QUESTION.question_text)
       }, 1000)
       return () => clearTimeout(t)
     }
-  }, [currentLevelIdx, isMuted])
+  }, [currentLevelIdx, isMuted, gameState])
 
   // Robot Voice Feedback (Correct/Wrong/Hints)
   useEffect(() => {
@@ -168,7 +171,7 @@ export default function GameContainer() {
   // Move existing words and check for wrap-around
   useEffect(() => {
     const interval = setInterval(() => {
-      if (isPausedRef.current || isCelebrating) return
+      if (isPausedRef.current || isCelebrating || gameState !== 'playing') return
 
       setWordPositions(prev => {
         const next = { ...prev }
@@ -214,19 +217,19 @@ export default function GameContainer() {
       })
     }, 16)
     return () => clearInterval(interval)
-  }, [sortedWords, isCelebrating, spawnQueue, retryQueue])
+  }, [sortedWords, isCelebrating, spawnQueue, retryQueue, gameState])
 
   const handleDragStart = useCallback((e, word) => {
-    if (isPausedRef.current || isCelebrating) return
+    if (isPausedRef.current || isCelebrating || gameState !== 'playing') return
     const rect = e.currentTarget.getBoundingClientRect()
     setDragging({ word, offsetX: e.clientX - rect.left, offsetY: e.clientY - rect.top, x: e.clientX, y: e.clientY })
     dragRef.current = word
     setRobotFeedback('')
     if (!isMuted) sounds.drag()
-  }, [isCelebrating, isMuted])
+  }, [isCelebrating, isMuted, gameState])
 
   const handleShowHint = useCallback((word) => {
-    if (isPausedRef.current || isCelebrating) return
+    if (isPausedRef.current || isCelebrating || gameState !== 'playing') return
     const hintText = QUESTION.hints?.[word.id] || "No hint available."
     setActiveHint({ wordText: word.text, hintText })
     
@@ -239,7 +242,7 @@ export default function GameContainer() {
     hintTimeoutRef.current = setTimeout(() => {
       setActiveHint(null)
     }, 4000)
-  }, [QUESTION, isMuted, isCelebrating])
+  }, [QUESTION, isMuted, isCelebrating, gameState])
 
   useEffect(() => {
     if (!dragging) return
@@ -322,6 +325,23 @@ export default function GameContainer() {
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden', cursor: dragging ? 'grabbing' : 'default', userSelect: 'none', animation: flashType === 'wrong' ? 'container-vibrate 0.4s ease' : 'none' }}>
+      
+      {/* ── Start Screen Overlay ── */}
+      {gameState === 'start' && (
+        <StartScreen 
+          onStart={() => setGameState('playing')} 
+          onTutorial={() => setGameState('tutorial')} 
+        />
+      )}
+
+      {/* ── Tutorial Overlay ── */}
+      {gameState === 'tutorial' && (
+        <TutorialOverlay 
+          onComplete={() => setGameState('playing')} 
+          onSkip={() => setGameState('playing')} 
+        />
+      )}
+
       <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${ASSETS.factoryBg})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(0.55) saturate(1.2) hue-rotate(185deg)', zIndex: 0 }} />
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(2, 6, 23, 0.7) 0%, rgba(2, 6, 23, 0.3) 45%, rgba(2, 6, 23, 0.9) 100%)', zIndex: 1 }} />
       
@@ -387,30 +407,34 @@ export default function GameContainer() {
       )}
 
       {/* HUD ── TOP */}
-      <div style={{ position: 'absolute', top: 15, left: 15, right: 15, display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 1000, gap: 15 }}>
-        <div className="glass" style={{ borderRadius: 16, padding: '12px 28px', color: '#fff', fontWeight: 900, fontSize: 18, border: '1px solid var(--accent-cyan)' }}>LEVEL {currentLevelIdx + 1}</div>
-        <div style={{ flex: 1 }}><ProgressBar sorted={Object.keys(sortedWords).length} total={QUESTION.words.length} score={score} incorrect={incorrect} /></div>
-        <button className="btn-premium" onClick={() => setIsPaused(!isPaused)} style={{ padding: '12px 28px', fontSize: 14 }}>{isPaused ? '▶ RESUME' : '⏸ PAUSE'}</button>
-      </div>
+      {gameState === 'playing' && (
+        <div style={{ position: 'absolute', top: 15, left: 15, right: 15, display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 1000, gap: 15 }}>
+          <div className="glass" style={{ borderRadius: 16, padding: '12px 28px', color: '#fff', fontWeight: 900, fontSize: 18, border: '1px solid var(--accent-cyan)' }}>LEVEL {currentLevelIdx + 1}</div>
+          <div style={{ flex: 1 }}><ProgressBar sorted={Object.keys(sortedWords).length} total={QUESTION.words.length} score={score} incorrect={incorrect} /></div>
+          <button className="btn-premium" onClick={() => setIsPaused(!isPaused)} style={{ padding: '12px 28px', fontSize: 14 }}>{isPaused ? '▶ RESUME' : '⏸ PAUSE'}</button>
+        </div>
+      )}
 
       {/* HUD ── BOTTOM Left (MUTE TOGGLE) */}
-      <div style={{ position: 'absolute', bottom: 20, left: 20, zIndex: 1000 }}>
-        <button 
-          onClick={() => setIsMuted(!isMuted)} 
-          className="glass"
-          style={{ 
-            borderRadius: '50%', 
-            width: 65, height: 65, display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: 28, cursor: 'pointer', color: 'var(--accent-cyan)',
-            transition: 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-            border: '2px solid var(--accent-cyan)',
-          }}
-          onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.1)'; e.currentTarget.style.boxShadow = '0 0 25px var(--accent-cyan)'; }}
-          onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = 'var(--glow-cyan)'; }}
-        >
-          {isMuted ? '🔇' : '🔊'}
-        </button>
-      </div>
+      {gameState === 'playing' && (
+        <div style={{ position: 'absolute', bottom: 20, left: 20, zIndex: 1000 }}>
+          <button 
+            onClick={() => setIsMuted(!isMuted)} 
+            className="glass"
+            style={{ 
+              borderRadius: '50%', 
+              width: 65, height: 65, display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: 28, cursor: 'pointer', color: 'var(--accent-cyan)',
+              transition: 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+              border: '2px solid var(--accent-cyan)',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.1)'; e.currentTarget.style.boxShadow = '0 0 25px var(--accent-cyan)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = 'var(--glow-cyan)'; }}
+          >
+            {isMuted ? '🔇' : '🔊'}
+          </button>
+        </div>
+      )}
 
       <div style={{ position: 'absolute', top: 95, left: 0, right: 0, textAlign: 'center', zIndex: 100 }}>
         <div className="glass" style={{ 
@@ -441,9 +465,11 @@ export default function GameContainer() {
 
       <CategoryBins categories={CATEGORIES} binCounts={binCounts} glowingBin={glowingBin} shakingBin={shakingBin} dragging={dragging} binsRef={binsRef} />
       
-      <div style={{ zIndex: 10000, position: 'absolute', right: -30, top: '45%', transform: 'translateY(-50%)', pointerEvents: 'none' }}>
-        <RobotGuide isPaused={isPaused} externalMessage={robotFeedback} />
-      </div>
+      {gameState === 'playing' && (
+        <div style={{ zIndex: 1000, position: 'absolute', right: -30, top: '45%', transform: 'translateY(-50%)', pointerEvents: 'none' }}>
+          <RobotGuide isPaused={isPaused} externalMessage={robotFeedback} />
+        </div>
+      )}
 
       <DragGhost dragging={dragging} />
       {particles.map(p => <ParticleBurst key={p.id} x={p.x} y={p.y} color={p.color} count={p.count} onDone={() => setParticles(pr => pr.filter(x => x.id !== p.id))} />)}
